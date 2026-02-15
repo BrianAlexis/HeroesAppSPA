@@ -5,6 +5,7 @@ import CustomJumbotrom from "@/components/custom/CustomJumbotrom"
 import HeroStats from "@/heroes/components/HeroStats"
 import HeroGrid from "@/heroes/components/HeroGrid"
 import CustomPagination from "@/components/custom/CustomPagination"
+import CustomBreadcrumbs from "@/components/custom/CustomBreadcrumbs"
 
 const HomePage = () => {
 
@@ -20,7 +21,9 @@ const HomePage = () => {
                 {/* Header */}
                 <CustomJumbotrom
                     title="SuperHeroes Universe"
-                    description="Descubre, explora y administra súper heroes y villanos" />
+                    description="Discover, explore, and manage superheroes and villains" />
+
+                <CustomBreadcrumbs currentPage="SuperHeroes" />
 
                 {/* Stats Dashboard */}
                 <HeroStats />
