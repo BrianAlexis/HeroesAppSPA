@@ -9,7 +9,7 @@ const CustomMenu = () => {
     const isActive = (path: string) => pathname === path;
 
     return (
-        <NavigationMenu>
+        <NavigationMenu className="py-5">
             <NavigationMenuList>
 
                 {/* Home */}
