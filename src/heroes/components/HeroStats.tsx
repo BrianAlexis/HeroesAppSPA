@@ -1,12 +1,19 @@
+import { use } from "react"
 import useHeroSummary from "../hooks/useHeroSummary"
 
 import { Badge } from "@/components/ui/badge"
 import { Trophy, Users, Zap } from "lucide-react"
 import HeroStatCard from "./HeroStatCard"
+import { FavoriteHeroContext } from "../context/FavoriteHeroContext"
 
 const HeroStats = () => {
 
     const { data: summary } = useHeroSummary()
+    const { favoriteCount } = use(FavoriteHeroContext)
+
+    if (!summary) {
+        return <div>Loading...</div>
+    }
 
     return (
 
@@ -31,12 +38,12 @@ const HeroStats = () => {
                 title="Favorites"
                 icon={<Zap className="h-4 w-4 text-muted-foreground" />}>
 
-                <div className="text-2xl font-bold text-red-600">3</div>
-                <p className="text-xs text-muted-foreground">18.8% of total</p>
+                <div className="text-2xl font-bold text-red-600">{favoriteCount}</div>
+                <p className="text-xs text-muted-foreground">{((favoriteCount / summary.totalHeroes) * 100).toFixed(2)}% of total</p>
             </HeroStatCard>
 
             <HeroStatCard
-                title="Favoritos"
+                title="Strong"
                 icon={<Zap className="h-4 w-4 text-muted-foreground" />}>
 
                 <div className="text-lg font-bold">{summary?.strongestHero.alias}</div>
@@ -44,7 +51,7 @@ const HeroStats = () => {
             </HeroStatCard>
 
             <HeroStatCard
-                title="Favoritos"
+                title="Intelligent"
                 icon={<Trophy className="h-4 w-4 text-muted-foreground" />}>
 
                 <div className="text-lg font-bold">{summary?.smartestHero.alias}</div>

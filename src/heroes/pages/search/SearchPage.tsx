@@ -2,6 +2,7 @@ import CustomJumbotrom from "@/components/custom/CustomJumbotrom"
 import HeroStats from "@/heroes/components/HeroStats"
 import SearchControls from "./ui/SearchControls"
 import CustomBreadcrumbs from "@/components/custom/CustomBreadcrumbs"
+import HeroGrid from "@/heroes/components/HeroGrid"
 
 const SearchPage = () => {
     return (
@@ -25,6 +26,8 @@ const SearchPage = () => {
 
             {/* Filter and search */}
             <SearchControls />
+
+            <HeroGrid heroes={[]} />
         </div >
 
     )

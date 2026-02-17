@@ -1,5 +1,5 @@
 import { useSearchParams } from "react-router"
-import { useMemo } from "react"
+import { use, useMemo } from "react"
 
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs"
 import CustomJumbotrom from "@/components/custom/CustomJumbotrom"
@@ -9,11 +9,13 @@ import CustomPagination from "@/components/custom/CustomPagination"
 import CustomBreadcrumbs from "@/components/custom/CustomBreadcrumbs"
 import useHeroSummary from "@/heroes/hooks/useHeroSummary"
 import { usePaginatedHero } from "@/heroes/hooks/usePaginatedHero"
+import { FavoriteHeroContext } from "@/heroes/context/FavoriteHeroContext"
 
 
 const HomePage = () => {
 
     const [searchParams, setSearchParams] = useSearchParams();
+    const { favoriteCount, favorites } = use(FavoriteHeroContext)
 
     const activeTab = searchParams.get("tab") ?? "all"
     const page = searchParams.get("page") ?? "1"
@@ -67,7 +69,7 @@ const HomePage = () => {
                             })
                             }
                         >
-                            Favorites (3)
+                            Favorites ({favoriteCount})
                         </TabsTrigger>
 
                         <TabsTrigger value="heroes"
@@ -103,7 +105,7 @@ const HomePage = () => {
                     <TabsContent value="favorites">
                         {/* Show all favorite characters */}
                         <h1>Favorites</h1>
-                        <HeroGrid heroes={[]} />
+                        <HeroGrid heroes={favorites} />
                     </TabsContent>
 
                     <TabsContent value="heroes">
@@ -119,7 +121,13 @@ const HomePage = () => {
                     </TabsContent>
                 </Tabs>
 
-                <CustomPagination totalPages={heroesResponse?.pages ?? 1} />
+                {
+                    selectedTab !== "favorites" && (
+                        <CustomPagination totalPages={heroesResponse?.pages ?? 1} />
+                    )
+                }
+
+
             </div>
         </>
     )
