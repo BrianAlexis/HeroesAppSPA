@@ -16,7 +16,8 @@ interface Props {
 
 const HeroGridCard = ({ hero }: Props) => {
 
-    const popSound = useSound('/sounds/keyboard_typing.mp3');
+    const popSound = useSound('/sounds/success.mp3');
+
 
 
     const navigate = useNavigate();
@@ -53,13 +54,13 @@ const HeroGridCard = ({ hero }: Props) => {
                     variant="ghost"
                     className="absolute bottom-3 right-3 bg-white/90 hover:bg-white dark:bg-black/90 dark:hover:bg-black/50"
                     onClick={() => toggleFavorite(hero)}
+                    onClickCapture={popSound}
                 >
                     <Heart
                         className={`h-4 w-4 ${isFavorite(hero)
                             ? "fill-red-500 text-red-500"
                             : "text-gray-500 dark:text-gray-400"
-                            }`}
-                        onClick={popSound} />
+                            }`} />
                 </Button>
             </div>
 

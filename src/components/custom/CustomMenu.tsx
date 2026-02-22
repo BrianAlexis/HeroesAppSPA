@@ -9,6 +9,8 @@ import { useSound } from "@/heroes/hooks/useSound"
 
 const CustomMenu = () => {
     const keyboardTypingSound = useSound('/sounds/keyboard_typing.mp3');
+    const popSound = useSound('/sounds/success.mp3');
+
 
     const { pathname } = useLocation()
     const { theme, toggleTheme } = useTheme()
@@ -43,7 +45,7 @@ const CustomMenu = () => {
                         onClick={toggleTheme}
                         aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
                         className="shrink-0"
-                        onClickCapture={keyboardTypingSound}
+                        onClickCapture={popSound}
                     >
                         {theme === "dark" ? (
                             <Sun className="h-5 w-5" />
