@@ -36,7 +36,7 @@ const CustomBreadcrumbs = ({ currentPage, breadcrumbs = [] }: Props) => {
                 <BreadcrumbSeparator />
 
                 <BreadcrumbItem>
-                    <BreadcrumbPage className="text-black font-bold">{currentPage}</BreadcrumbPage>
+                    <BreadcrumbPage className="font-bold">{currentPage}</BreadcrumbPage>
                 </BreadcrumbItem>
             </BreadcrumbList>
         </Breadcrumb>

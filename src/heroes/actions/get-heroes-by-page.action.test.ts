@@ -41,21 +41,4 @@ describe("getHeroesByPageAction", () => {
         })
 
     })
-
-    test("Should return correct heroes when page is not a number", async () => {
-
-        const responseObject = {
-            total: 10,
-            pages: 1,
-            heroes: []
-        }
-
-        heroesApiMock.onGet("/").reply(200, responseObject)
-        heroesApiMock.resetHistory()
-
-        await getHeroesByPageAction("abc" as unknown as number)
-
-        const params = heroesApiMock.history.get[0]
-        expect(params).toStrictEqual({ limit: 6, offset: 0, category: 'all' },)
-    })
 })

@@ -2,7 +2,7 @@ import { use } from "react"
 import useHeroSummary from "../hooks/useHeroSummary"
 
 import { Badge } from "@/components/ui/badge"
-import { Trophy, Users, Zap } from "lucide-react"
+import { Heart, Trophy, Users, Zap } from "lucide-react"
 import HeroStatCard from "./HeroStatCard"
 import { FavoriteHeroContext } from "../context/FavoriteHeroContext"
 
@@ -21,7 +21,7 @@ const HeroStats = () => {
 
             <HeroStatCard
                 title="Total Characters"
-                icon={<Users className="h-4 w-4 text-muted-foreground" />}>
+                icon={<Users className="h-4 w-4 text-purple-500" />}>
 
                 <div className="text-2xl font-bold">{summary?.totalHeroes}</div>
                 <div className="flex gap-1 mt-2">
@@ -36,25 +36,25 @@ const HeroStats = () => {
 
             <HeroStatCard
                 title="Favorites"
-                icon={<Zap className="h-4 w-4 text-muted-foreground" />}>
+                icon={<Heart className="h-4 w-4 text-red-500" />}>
 
-                <div className="text-2xl font-bold text-red-600">{favoriteCount}</div>
+                <div className="text-2xl font-bold text-red-500">{favoriteCount}</div>
                 <p className="text-xs text-muted-foreground">{((favoriteCount / summary.totalHeroes) * 100).toFixed(2)}% of total</p>
             </HeroStatCard>
 
             <HeroStatCard
-                title="Strong"
-                icon={<Zap className="h-4 w-4 text-muted-foreground" />}>
+                title="Strongest Hero"
+                icon={<Zap className="h-4 w-4 text-orange-500" />}>
 
-                <div className="text-lg font-bold">{summary?.strongestHero.alias}</div>
+                <div className="text-lg font-bold text-orange-500">{summary?.strongestHero.alias}</div>
                 <p className="text-xs text-muted-foreground">Strength: {summary?.strongestHero.strength}</p>
             </HeroStatCard>
 
             <HeroStatCard
-                title="Intelligent"
-                icon={<Trophy className="h-4 w-4 text-muted-foreground" />}>
+                title="Intelligentest Hero"
+                icon={<Trophy className="h-4 w-4 text-blue-500" />}>
 
-                <div className="text-lg font-bold">{summary?.smartestHero.alias}</div>
+                <div className="text-lg font-bold text-blue-500">{summary?.smartestHero.alias}</div>
                 <p className="text-xs text-muted-foreground">Intelligence: {summary?.strongestHero.intelligence}</p>
             </HeroStatCard>
         </div>

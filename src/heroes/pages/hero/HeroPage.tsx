@@ -60,8 +60,8 @@ export const HeroPage = () => {
     }
 
     return (
-        <div className="min-h-screen bg-gray-50">
-            {/* Header Banner */}
+        <div className="min-h-screen dark:from-slate-950 dark:via-slate-900 dark:to-slate-950">
+
             <div className="bg-gradient-to-r from-slate-900 via-blue-900 to-slate-900 text-white">
                 <div className="max-w-7xl mx-auto px-6 py-12">
                     <div className="flex flex-col md:flex-row items-center gap-8">
@@ -73,11 +73,6 @@ export const HeroPage = () => {
                                 height={200}
                                 className="rounded-full border-4 border-white/20 shadow-2xl"
                             />
-                            <div className="absolute -top-2 -right-2">
-                                <div className="bg-yellow-400 text-black rounded-full p-2">
-                                    <Star className="w-6 h-6" />
-                                </div>
-                            </div>
                         </div>
 
                         <div className="flex-1 text-center md:text-left">
@@ -99,7 +94,7 @@ export const HeroPage = () => {
                         <div className="text-center">
                             <div className="bg-white/10 rounded-lg p-6 backdrop-blur-sm">
                                 <div className="text-3xl font-bold text-yellow-400">{averagePower}%</div>
-                                <div className="text-sm text-gray-300">Nivel de Poder</div>
+                                <div className="text-sm text-gray-300">Power level</div>
                                 <div className="flex justify-center mt-2">
                                     {[...Array(5)].map((_, i) => (
                                         <Star
@@ -114,31 +109,29 @@ export const HeroPage = () => {
                 </div>
             </div>
 
-            {/* Main Content */}
             <div className="max-w-7xl mx-auto px-6 py-8">
                 <Tabs defaultValue="stats" className="w-full">
                     <TabsList className="grid w-full grid-cols-4 mb-8">
                         <TabsTrigger value="stats" className="flex items-center gap-2">
                             <Gauge className="w-4 h-4" />
-                            Estadísticas
+                            Statics
                         </TabsTrigger>
                         <TabsTrigger value="powers" className="flex items-center gap-2">
                             <Zap className="w-4 h-4" />
-                            Poderes
+                            Powers
                         </TabsTrigger>
                         <TabsTrigger value="team" className="flex items-center gap-2">
                             <Users className="w-4 h-4" />
-                            Equipo
+                            Team
                         </TabsTrigger>
                         <TabsTrigger value="info" className="flex items-center gap-2">
                             <Award className="w-4 h-4" />
-                            Información
+                            Information
                         </TabsTrigger>
                     </TabsList>
 
                     <TabsContent value="stats" className="space-y-6">
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                            {/* Strength */}
                             <Card className="text-center">
                                 <CardContent className="pt-6">
                                     <div className="flex justify-center mb-4">
@@ -146,13 +139,12 @@ export const HeroPage = () => {
                                             <Zap className="w-8 h-8 text-red-600" />
                                         </div>
                                     </div>
-                                    <h3 className="font-semibold text-lg mb-2">Fuerza</h3>
+                                    <h3 className="font-semibold text-lg mb-2">Strength</h3>
                                     <div className="text-3xl font-bold text-red-600 mb-2">{superheroData.strength}</div>
                                     <Progress value={superheroData.strength * 10} className="h-2" />
                                 </CardContent>
                             </Card>
 
-                            {/* Intelligence */}
                             <Card className="text-center">
                                 <CardContent className="pt-6">
                                     <div className="flex justify-center mb-4">
@@ -160,13 +152,12 @@ export const HeroPage = () => {
                                             <Brain className="w-8 h-8 text-purple-600" />
                                         </div>
                                     </div>
-                                    <h3 className="font-semibold text-lg mb-2">Inteligencia</h3>
+                                    <h3 className="font-semibold text-lg mb-2">Intelligence</h3>
                                     <div className="text-3xl font-bold text-purple-600 mb-2">{superheroData.intelligence}</div>
                                     <Progress value={superheroData.intelligence * 10} className="h-2" />
                                 </CardContent>
                             </Card>
 
-                            {/* Speed */}
                             <Card className="text-center">
                                 <CardContent className="pt-6">
                                     <div className="flex justify-center mb-4">
@@ -174,13 +165,12 @@ export const HeroPage = () => {
                                             <Gauge className="w-8 h-8 text-yellow-600" />
                                         </div>
                                     </div>
-                                    <h3 className="font-semibold text-lg mb-2">Velocidad</h3>
+                                    <h3 className="font-semibold text-lg mb-2">Speed</h3>
                                     <div className="text-3xl font-bold text-yellow-600 mb-2">{superheroData.speed}</div>
                                     <Progress value={superheroData.speed * 10} className="h-2" />
                                 </CardContent>
                             </Card>
 
-                            {/* Durability */}
                             <Card className="text-center">
                                 <CardContent className="pt-6">
                                     <div className="flex justify-center mb-4">
@@ -188,43 +178,42 @@ export const HeroPage = () => {
                                             <Shield className="w-8 h-8 text-green-600" />
                                         </div>
                                     </div>
-                                    <h3 className="font-semibold text-lg mb-2">Resistencia</h3>
+                                    <h3 className="font-semibold text-lg mb-2">Durability</h3>
                                     <div className="text-3xl font-bold text-green-600 mb-2">{superheroData.durability}</div>
                                     <Progress value={superheroData.durability * 10} className="h-2" />
                                 </CardContent>
                             </Card>
                         </div>
 
-                        {/* Power Comparison Chart */}
                         <Card>
                             <CardHeader>
-                                <CardTitle>Comparación de Habilidades</CardTitle>
+                                <CardTitle>Skills comparison</CardTitle>
                             </CardHeader>
                             <CardContent>
                                 <div className="space-y-4">
                                     <div className="flex items-center gap-4">
-                                        <div className="w-24 text-sm font-medium">Fuerza</div>
+                                        <div className="w-24 text-sm font-medium">Strength</div>
                                         <div className="flex-1">
                                             <Progress value={superheroData.strength * 10} className="h-4" />
                                         </div>
                                         <div className="w-12 text-right font-bold">{superheroData.strength}/10</div>
                                     </div>
                                     <div className="flex items-center gap-4">
-                                        <div className="w-24 text-sm font-medium">Inteligencia</div>
+                                        <div className="w-24 text-sm font-medium">Intelligence</div>
                                         <div className="flex-1">
                                             <Progress value={superheroData.intelligence * 10} className="h-4" />
                                         </div>
                                         <div className="w-12 text-right font-bold">{superheroData.intelligence}/10</div>
                                     </div>
                                     <div className="flex items-center gap-4">
-                                        <div className="w-24 text-sm font-medium">Velocidad</div>
+                                        <div className="w-24 text-sm font-medium">Speed</div>
                                         <div className="flex-1">
                                             <Progress value={superheroData.speed * 10} className="h-4" />
                                         </div>
                                         <div className="w-12 text-right font-bold">{superheroData.speed}/10</div>
                                     </div>
                                     <div className="flex items-center gap-4">
-                                        <div className="w-24 text-sm font-medium">Resistencia</div>
+                                        <div className="w-24 text-sm font-medium">Durability</div>
                                         <div className="flex-1">
                                             <Progress value={superheroData.durability * 10} className="h-4" />
                                         </div>
@@ -240,7 +229,7 @@ export const HeroPage = () => {
                             <CardHeader>
                                 <CardTitle className="flex items-center gap-2">
                                     <Zap className="w-6 h-6 text-yellow-500" />
-                                    Superpoderes
+                                    Superpowers
                                 </CardTitle>
                             </CardHeader>
                             <CardContent>
@@ -268,7 +257,7 @@ export const HeroPage = () => {
                             <CardHeader>
                                 <CardTitle className="flex items-center gap-2">
                                     <Users className="w-6 h-6 text-green-500" />
-                                    Afiliación de Equipo
+                                    Team
                                 </CardTitle>
                             </CardHeader>
                             <CardContent>
@@ -277,7 +266,6 @@ export const HeroPage = () => {
                                         <Users className="w-12 h-12 text-green-600" />
                                     </div>
                                     <h3 className="text-2xl font-bold text-green-700 mb-2">{superheroData.team}</h3>
-                                    <p className="text-gray-600">Miembro activo del equipo de superhéroes más poderoso</p>
                                 </div>
                             </CardContent>
                         </Card>
@@ -287,11 +275,11 @@ export const HeroPage = () => {
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <Card>
                                 <CardHeader>
-                                    <CardTitle>Detalles Personales</CardTitle>
+                                    <CardTitle>Personal information</CardTitle>
                                 </CardHeader>
                                 <CardContent className="space-y-4">
                                     <div className="flex justify-between items-center py-2 border-b">
-                                        <span className="text-gray-600">Nombre Real:</span>
+                                        <span className="text-gray-600">Real name:</span>
                                         <span className="font-semibold">{superheroData.name}</span>
                                     </div>
                                     <div className="flex justify-between items-center py-2 border-b">
@@ -299,13 +287,13 @@ export const HeroPage = () => {
                                         <span className="font-semibold">{superheroData.alias}</span>
                                     </div>
                                     <div className="flex justify-between items-center py-2 border-b">
-                                        <span className="text-gray-600">Categoría:</span>
+                                        <span className="text-gray-600">Category:</span>
                                         <Badge className={`${getCategoryColor(superheroData.category)} text-white`}>
                                             {superheroData.category}
                                         </Badge>
                                     </div>
                                     <div className="flex justify-between items-center py-2">
-                                        <span className="text-gray-600">Estado:</span>
+                                        <span className="text-gray-600">Satus:</span>
                                         <Badge className={`${getStatusColor(superheroData.status)} text-white`}>
                                             {superheroData.status}
                                         </Badge>
@@ -315,21 +303,21 @@ export const HeroPage = () => {
 
                             <Card>
                                 <CardHeader>
-                                    <CardTitle>Información del Universo</CardTitle>
+                                    <CardTitle>Universe information</CardTitle>
                                 </CardHeader>
                                 <CardContent className="space-y-4">
                                     <div className="flex justify-between items-center py-2 border-b">
-                                        <span className="text-gray-600">Universo:</span>
+                                        <span className="text-gray-600">Universe:</span>
                                         <span className="font-semibold">{superheroData.universe}</span>
                                     </div>
                                     <div className="flex justify-between items-center py-2 border-b">
-                                        <span className="text-gray-600">Primera Aparición:</span>
+                                        <span className="text-gray-600">First appearance:</span>
                                         <span className="font-semibold">{superheroData.firstAppearance}</span>
                                     </div>
                                     <div className="flex justify-between items-center py-2">
-                                        <span className="text-gray-600">Años Activo:</span>
+                                        <span className="text-gray-600">Active years:</span>
                                         <span className="font-semibold">
-                                            {new Date().getFullYear() - Number.parseInt(superheroData.firstAppearance)} años
+                                            {new Date().getFullYear() - Number.parseInt(superheroData.firstAppearance)} years
                                         </span>
                                     </div>
                                 </CardContent>
