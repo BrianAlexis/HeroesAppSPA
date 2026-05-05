@@ -1,73 +1,147 @@
-# React + TypeScript + Vite
+# Heroes App SPA
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A single-page application for browsing, searching, and managing a catalog of superheroes and villains. The UI consumes a REST API and supports favorites, filters, pagination, and detailed hero profiles.
 
-Currently, two official plugins are available:
+This project is part of the **React course by Fernando Herrera** (Module 07 — Heroes SPA).
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## Features
 
-The React Compiler is currently not compatible with SWC. See [this issue](https://github.com/vitejs/vite-plugin-react/issues/428) for tracking the progress.
+- **Home dashboard** — Summary statistics, tabbed views (all characters, favorites, heroes only, villains only), URL-driven pagination (`page`, `limit`, `category`, `tab`), and a responsive hero grid.
+- **Hero detail** — Full profile with stats (strength, intelligence, speed, durability), team, universe, powers, and visual progress indicators; invalid slugs redirect home.
+- **Search** — Query heroes by name, strength, team, category, universe, and status; results cached with TanStack Query.
+- **Favorites** — Toggle favorites per hero; state persisted in `localStorage` via React Context.
+- **Theming** — Global theme context for consistent light/dark (or app-wide) styling.
+- **Admin section** — Route scaffold at `#/admin` (placeholder page for future tools).
+- **Code splitting** — Route-level lazy loading for faster initial load.
+- **Developer experience** — React Query Devtools, ESLint, Vitest with Testing Library and optional coverage.
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Tech Stack
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+| Area | Technology |
+|------|------------|
+| Runtime | React 19 |
+| Language | TypeScript |
+| Build & dev server | Vite 7 (`@vitejs/plugin-react-swc`) |
+| Styling | Tailwind CSS 4 (`@tailwindcss/vite`), `tw-animate-css` |
+| Routing | React Router 7 — **hash router** (`createHashRouter`) |
+| Data fetching | TanStack Query (React Query) 5 |
+| HTTP client | Axios (`src/heroes/api/hero.api.ts`) |
+| UI primitives | Radix UI–based components (shadcn-style), `class-variance-authority`, `clsx`, `tailwind-merge` |
+| Icons | Lucide React |
+| Tests | Vitest, jsdom, Testing Library |
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+Path alias: `@` → `src` (see `vite.config.ts` and `tsconfig`).
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+---
+
+## Project Structure (overview)
+
+```
+src/
+├── HeroesApp.tsx          # Root: Theme, QueryClient, Favorites, Router
+├── main.tsx
+├── router/app.router.tsx  # Hash routes: /, /heroes/:idSlug, /search/, /admin
+├── contexts/ThemeContext.tsx
+├── heroes/
+│   ├── api/               # Axios instance → VITE_API_URL + /api/heroes
+│   ├── actions/           # Server actions / query functions
+│   ├── components/      # HeroGrid, HeroStats, cards, etc.
+│   ├── context/           # FavoriteHeroContext (localStorage)
+│   ├── hooks/             # Pagination, summary, search helpers, sound
+│   ├── pages/             # Home, Search, Hero detail
+│   └── types/             # Hero interface & API response types
+├── admin/                 # Admin layout & placeholder page
+└── components/            # Shared UI (custom + shadcn-style ui/)
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Prerequisites
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+- **Node.js** (LTS recommended)
+- A running **backend** that exposes the heroes API under the base URL you configure (see Environment variables).
+
+---
+
+## Environment Variables
+
+Create a `.env` file in the project root (you can copy `.env.template`):
+
+| Variable | Description |
+|----------|-------------|
+| `VITE_API_URL` | Base URL of your API server (no trailing path to `/api/heroes`; the client appends `/api/heroes`). Example: `http://localhost:3000` |
+
+Example:
+
+```env
+VITE_API_URL=http://localhost:3000
 ```
+
+---
+
+## Getting Started
+
+```bash
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
+```
+
+Open the URL printed in the terminal (typically `http://localhost:5173`). Routes use the hash (`#`), e.g. `http://localhost:5173/#/`, `http://localhost:5173/#/search/`.
+
+### Production build
+
+```bash
+npm run build
+npm run preview   # optional: preview the production build locally
+```
+
+---
+
+## Scripts
+
+| Script | Description |
+|--------|-------------|
+| `npm run dev` | Start Vite in development mode |
+| `npm run build` | Typecheck and produce production assets |
+| `npm run preview` | Serve the production build |
+| `npm run lint` | Run ESLint |
+| `npm run test` | Run Vitest |
+| `npm run test:ui` | Vitest with UI |
+| `npm run coverage` | Tests with coverage report |
+
+---
+
+## API Client
+
+The Axios instance is configured in `src/heroes/api/hero.api.ts` with:
+
+- `baseURL`: `${VITE_API_URL}/api/heroes`
+
+Ensure your backend implements the endpoints expected by the actions in `src/heroes/actions/` (list by page, get one by slug, search, summary, filter options, etc.).
+
+---
+
+## Testing
+
+Tests live alongside source files (e.g. `*.test.ts`, `*.test.tsx`). Run `npm run test` or `npm run coverage` after installing dependencies. Use `.env.test` if your test setup requires mocked env values.
+
+---
+
+## License
+
+This repository is for educational purposes (course project). Adjust licensing if you publish or reuse the code.
+
+---
+
+## Author
+
+**Brian Alexis Acuña**
+
+- [LinkedIn](https://www.linkedin.com/in/brian-alexis-acu%C3%B1a/)
